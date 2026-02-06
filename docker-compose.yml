@@ -1,3 +1,5 @@
+version: "3.8"
+
 services:
   f5tts:
     build:
@@ -22,6 +24,10 @@ services:
           memory: 8G
         reservations:
           memory: 4G
+          devices:
+            - driver: nvidia
+              count: 1
+              capabilities: [gpu]
 
 volumes:
   f5tts_hf_cache:
