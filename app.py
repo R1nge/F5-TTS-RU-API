@@ -11,6 +11,14 @@ from pydantic import BaseModel
 from fastapi.responses import FileResponse
 from ruaccent import RUAccent
 
+
+#os.environ["TORCHAUDIO_USE_BACKEND_XPP"] = "0"
+# И на всякий случай принудительно выключаем torchcodec
+#import sys
+#sys.modules['torchcodec'] = None
+
+env = os.environ.copy()
+env["TORCHAUDIO_USE_BACKEND"] = 'soundfile' #"ffmpeg"  # Или "soundfile"
 # -------------------
 # Конфигурация
 # -------------------
@@ -45,7 +53,7 @@ class TTSRequest(BaseModel):
     speed: float | None = None  # скорость воспроизведения (1.0 = стандарт)
     cfg_strength: float | None = None  # сила CFG (контроль генерации)
     nfe_step: int | None = None  # количество шагов NFE (качество/скорость)
-    fix_duration: bool | None = None  # фиксировать длительность (True/False)
+    fix_duration: float | None = None  # фиксировать длительность (True/False)
     cross_fade_duration: float | None = None  # длительность кроссфейда между чанками
     save_chunk: bool | None = None  # сохранять ли промежуточные чанки
 
@@ -67,21 +75,30 @@ async def synthesize(req: TTSRequest):
     Raises:
         HTTPException: При ошибках валидации, генерации или скачивания файлов.
     """
+    print("Started generating")
     if not req.input or req.input.strip() == "":
         raise HTTPException(status_code=400, detail="input text required")
+    print(f"Has input text {req.input}")
 
     os.makedirs(INPUT_DIR, exist_ok=True)
+    print(f"Make Input Dir {INPUT_DIR}")
     os.makedirs(OUTPUT_DIR, exist_ok=True)
+    print(f"Make Output Dir {OUTPUT_DIR}")
     out_file = generate_output_filename()
-
+    print(f"Generate output file name {out_file}")
     # Обработка текста с помощью RUAccent
     gen_text = process_with_ruaccent(req.input)
+    print(f"RuAccent {gen_text}")
     # Получаем пути к ckpt и vocab
     ckpt_path, vocab_path = get_model_paths()
+    print(f"Checkpoint, vocab paths {ckpt_path}, {vocab_path}")
     ref_audio_path = get_ref_audio_path(req.ref_audio)
+    print(f"Reference audio path {ref_audio_path}")
     ref_text_value = get_ref_text_value(req.ref_text)
-
+    print(f"Reference text {ref_text_value}")
     # Формируем команду для f5-tts_infer-cli
+
+    print(f"\n Checkpoint path; {ckpt_path}\n Vocab Path: {vocab_path}\n Gen Text: {gen_text}\n Out File {out_file}\n Ref audio path: {ref_audio_path}\n Ref text: {ref_text_value}\n Vocoder Name: {req.vocoder_name}\n Remove Silence: {req.remove_silence}\n Target rms: {req.target_rms}\n Speed: {req.speed}\n cfg strength: {req.cfg_strength}\n nfe step: {req.nfe_step}\n fix duration: {req.fix_duration}\n cross fade duration: {req.cross_fade_duration}\n save chunk: {req.save_chunk}")
     cmd = build_cli_command(
         ckpt_path, vocab_path, gen_text, out_file, 
         ref_audio_path=ref_audio_path, 
@@ -96,11 +113,12 @@ async def synthesize(req: TTSRequest):
         cross_fade_duration=req.cross_fade_duration,
         save_chunk=req.save_chunk
     )
+    print(f"\n Build command {cmd}")
 
     try:
-        proc = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, timeout=600)
+        proc = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE,env=env,timeout=600)
         if proc.returncode != 0:
-            raise HTTPException(status_code=500, detail=f"f5-tts failed: {proc.stderr.decode('utf-8')[:1000]}")
+            raise HTTPException(status_code=600, detail=f"f5-tts failed: {proc.stderr.decode('utf-8')[:1000]}")
     except subprocess.TimeoutExpired:
         raise HTTPException(status_code=504, detail="TTS generation timed out")
 
@@ -317,7 +335,7 @@ def build_cli_command(
     speed: float | None = None,
     cfg_strength: float | None = None,
     nfe_step: int | None = None,
-    fix_duration: bool | None = None,
+    fix_duration: float | None = None,
     cross_fade_duration: float | None = None,
     save_chunk: bool | None = None
 ) -> list[str]:
@@ -360,7 +378,7 @@ def build_cli_command(
     if vocoder_name:
         cmd += ["--vocoder_name", vocoder_name]
     if remove_silence is not None:
-        cmd += ["--remove_silence", str(remove_silence).lower()]
+        cmd += ["--remove_silence"]
     if target_rms is not None:
         cmd += ["--target_rms", str(target_rms)]
     if speed is not None:
@@ -374,5 +392,5 @@ def build_cli_command(
     if cross_fade_duration is not None:
         cmd += ["--cross_fade_duration", str(cross_fade_duration)]
     if save_chunk is not None:
-        cmd += ["--save_chunk", str(save_chunk).lower()]
+        cmd += ["--save_chunk"]
     return cmd
