@@ -56,6 +56,6 @@ curl -X POST http://localhost:4123/v1/audio/speech \
 - Все входные данные проходят базовую фильтрацию для безопасности
 - network n8n_network declared as external, but could not be found `docker network create n8n_network`
 - Specify a HF token, otherwise wait an eternity for it to finish downloading `sudo docker logs -f f5tts-api`
-
+- Install docker-buildx `yay docker-buildx`
 ---
 **F5-TTS-RU-API** — быстрый и удобный способ синтеза русской речи с поддержкой референса и ударений!
