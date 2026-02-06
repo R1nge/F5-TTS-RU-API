@@ -54,6 +54,7 @@ curl -X POST http://localhost:4123/v1/audio/speech \
 - Если вы используете GPU (CUDA), обязательно установите PyTorch и torchaudio с поддержкой вашей версии CUDA (см. инструкцию [тут](https://github.com/SWivid/F5-TTS)).
 - Для работы с референсным аудио и текстом поддерживаются как локальные файлы, так и ссылки (URL)
 - Все входные данные проходят базовую фильтрацию для безопасности
+- network n8n_network declared as external, but could not be found `docker network create n8n_network`
 
 ---
 **F5-TTS-RU-API** — быстрый и удобный способ синтеза русской речи с поддержкой референса и ударений!
