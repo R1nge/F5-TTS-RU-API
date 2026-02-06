@@ -6,6 +6,7 @@ requests
 huggingface-hub
 tomli
 pydantic
+soundfile
 # Install f5-tts from PyPI (or git if required)
 f5-tts
 ruaccent
