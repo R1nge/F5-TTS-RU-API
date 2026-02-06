@@ -62,5 +62,6 @@ curl -X POST http://localhost:4123/v1/audio/speech \
 - Install docker-buildx `yay docker-buildx`
 - It took an hour or so to download the model from the HF. Logs only update on container restart.
 - Copy audio for a later use `sudo docker cp /some/local/path/<audio.wav> <container_id>:/app`
+- Install cuda container toolkit `yay nvidia-container-toolkit`
 ---
 **F5-TTS-RU-API** — быстрый и удобный способ синтеза русской речи с поддержкой референса и ударений!
