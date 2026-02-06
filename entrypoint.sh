@@ -6,6 +6,7 @@ if [ -n "${HUGGINGFACE_HUB_TOKEN}" ]; then
   mkdir -p /root/.huggingface
   echo -n "${HUGGINGFACE_HUB_TOKEN}" > /root/.huggingface/token
   export HUGGINGFACE_HUB_TOKEN="${HUGGINGFACE_HUB_TOKEN}"
+  export HF_TOKEN="${HUGGINGFACE_HUB_TOKEN}"
 fi
 
 
