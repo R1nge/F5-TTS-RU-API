@@ -3,7 +3,7 @@
 ## Описание
 
 TODO: 
-- [ ] auto-create a network
+- [ ] auto-create a network (create a bash script that does the neccesary steps)
 - [ ] fix downloading of the models
 
 **F5-TTS-RU-API** — это REST API для синтеза русской речи на базе модели [F5-TTS](https://github.com/SWivid/F5-TTS) с автоматической расстановкой ударений с помощью [ruaccent](https://github.com/Den4ikAI/ruaccent). Используется русская модель [Misha24-10/F5-TTS_RUSSIAN](https://huggingface.co/Misha24-10/F5-TTS_RUSSIAN) с HuggingFace. Поддерживается генерация аудио с референсом и без, а также формат вывода wav/mp3.
