@@ -19,7 +19,7 @@ MODEL_REPO="Misha24-10/F5-TTS_RUSSIAN"
 MODEL_CACHE="/root/.cache/huggingface/hub"
 
 # Скачиваем модель, если не скачана
-python3 -c "from huggingface_hub import snapshot_download; snapshot_download(repo_id='${MODEL_REPO}', cache_dir='${MODEL_CACHE}')"
+python3 -u -c "from huggingface_hub import snapshot_download; snapshot_download(repo_id='${MODEL_REPO}', cache_dir='${MODEL_CACHE}')"
 
 # run the API
 exec uvicorn app:app --host 0.0.0.0 --port ${PORT:-4123} --workers 1
