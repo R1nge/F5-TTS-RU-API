@@ -9,3 +9,7 @@ pydantic
 # Install f5-tts from PyPI (or git if required)
 f5-tts
 ruaccent
+#cuda
+--extra-index-url https://download.pytorch.org/whl/cu130
+torch
+torchaudio
