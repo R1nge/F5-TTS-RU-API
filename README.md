@@ -2,6 +2,7 @@
 
 ## Описание
 
+TODO: auto-create a network
 
 **F5-TTS-RU-API** — это REST API для синтеза русской речи на базе модели [F5-TTS](https://github.com/SWivid/F5-TTS) с автоматической расстановкой ударений с помощью [ruaccent](https://github.com/Den4ikAI/ruaccent). Используется русская модель [Misha24-10/F5-TTS_RUSSIAN](https://huggingface.co/Misha24-10/F5-TTS_RUSSIAN) с HuggingFace. Поддерживается генерация аудио с референсом и без, а также формат вывода wav/mp3.
 
@@ -58,5 +59,6 @@ curl -X POST http://localhost:4123/v1/audio/speech \
 - Specify a HF token, otherwise wait an eternity for it to finish downloading `sudo docker logs -f f5tts-api`
 - Install docker-buildx `yay docker-buildx`
 - It took an hour or so to download the model from the HF. Logs only update on container restart.
+- Copy audio for a later use `sudo docker cp /some/local/path/<audio.wav> <container_id>:/app`
 ---
 **F5-TTS-RU-API** — быстрый и удобный способ синтеза русской речи с поддержкой референса и ударений!
