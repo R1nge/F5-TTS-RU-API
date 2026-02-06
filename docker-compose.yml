@@ -9,7 +9,7 @@ services:
     container_name: f5tts-api
     restart: unless-stopped
     ports:
-      - "4123:4123"
+      - "127.0.0.1:4123:4123"
     environment:
       DEVICE: "cuda"
       HUGGINGFACE_HUB_TOKEN: "${HUGGINGFACE_HUB_TOKEN:-}"
