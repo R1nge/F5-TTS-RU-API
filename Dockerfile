@@ -28,7 +28,7 @@ RUN chmod +x /app/entrypoint.sh
 
 # Python deps
 RUN pip install --no-cache-dir -r /app/requirements.txt
-RUN pip install --no-cache-dir torchcodec
+RUN pip uninstall -y torchcodec 
 
 # Ensure huggingface cache dir exists (models will be downloaded here)
 VOLUME ["/root/.cache/huggingface", "/data"]
