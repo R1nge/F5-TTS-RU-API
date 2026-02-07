@@ -42,12 +42,7 @@ docker compose up --build
 ## Пример запроса к API
 
 ```bash
-curl -X POST http://localhost:4123/v1/audio/speech \
-  -H "Content-Type: application/json" \
-  -d '{
-		  "input": "Привет, мир!",
-		  "out_format": "mp3"
-		}' --output output.mp3
+curl -X POST http://localhost:4123/v1/audio/speech -H "Content-Type: application/json" -d '{"input": "Привет, мир!","out_format": "mp3","ref_audio": "/app/loli.wav","ref_text": "я кстати. ну эти. обожаю тебя. люблю котиков. ты котик", "vocoder_name": "vocos","remove_silence": true,"save_chunk": false}' --output output.mp3
 ```
 
 ## Используемые технологии
