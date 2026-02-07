@@ -9,7 +9,7 @@ TODO:
 
 Instructions:
 - Clone repo
-- Clone weights into the same folder `git clone https://huggingface.co/Misha24-10/F5-TTS_RUSSIAN`
+- Clone weights into the same folder `git lfs clone https://huggingface.co/Misha24-10/F5-TTS_RUSSIAN`
 - Put a reference audio with the filename of `loli.wav`
 - bash start.sh
 
