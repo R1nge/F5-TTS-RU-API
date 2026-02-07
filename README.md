@@ -6,7 +6,7 @@ TODO:
 - [x] auto-create a network (create a bash script that does the neccesary steps)
 - [x] save models into the repo and copy to the docker container
 
-
+## Установка
 Instructions:
 - Clone repo
 - Clone weights into the same folder `git lfs clone https://huggingface.co/Misha24-10/F5-TTS_RUSSIAN` ~90GB
@@ -28,16 +28,6 @@ F5-TTS — это современная, быстрая и качественн
   - `ref_audio` — путь или URL к эталонному аудиофайлу (опционально)
   - `ref_text` — текст или URL к текстовому файлу для эталонного аудио (опционально)
 
-## Установка
-
-
-## Быстрый старт (Docker)
-
-Рекомендуется запускать через Docker Compose — это полностью автоматизировано и не требует ручной установки зависимостей:
-
-```bash
-docker compose up --build
-```
 
 ## Пример запроса к API
 
