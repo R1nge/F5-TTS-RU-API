@@ -169,8 +169,8 @@ def get_model_paths() -> tuple[str, str]:
     Raises:
         HTTPException: Если не найдены snapshot, ckpt или vocab.txt
     """
-    ckpt_path = os.path.join("/app", "F5TTS_v1_Base_v2/model_last_inference.safetensors")
-    vocab_path = os.path.join("/app", "F5TTS_v1_Base/vocab.txt")
+    ckpt_path = os.path.join("/app", "model_last_inference.safetensors")
+    vocab_path = os.path.join("/app", "vocab.txt")
     if not os.path.isfile(ckpt_path):
         raise HTTPException(status_code=500, detail=f"model_last_inference.safetensors not found: {ckpt_path}")
     if not os.path.isfile(vocab_path):
