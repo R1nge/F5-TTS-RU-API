@@ -20,6 +20,8 @@ WORKDIR /app
 COPY requirements.txt /app/requirements.txt
 COPY app.py /app/app.py
 COPY entrypoint.sh /app/entrypoint.sh
+COPY F5-TTS_RUSSIAN/F5TTS_v1_Base /app/
+COPY F5-TTS_RUSSIAN/F5TTS_v1_Base_v2 /app/
 
 RUN chmod +x /app/entrypoint.sh
 
