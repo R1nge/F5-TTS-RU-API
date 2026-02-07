@@ -10,7 +10,7 @@ soundfile
 # Install f5-tts from PyPI (or git if required)
 f5-tts
 ruaccent
-#cuda
+#cuda rtx 50+
 --extra-index-url https://download.pytorch.org/whl/cu130
 torch
 torchaudio
