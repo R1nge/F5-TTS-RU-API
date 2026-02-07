@@ -22,4 +22,6 @@ mkdir -p /data/input /data/output /data/voices
 #python3 -u -c "from huggingface_hub import snapshot_download; snapshot_download(repo_id='${MODEL_REPO}', cache_dir='${MODEL_CACHE}', allow_patterns=['F5TTS_v1_Base/*','F5TTS_v1_Base_v2/*'], local_dir_use_symlinks=False)"
 #python3 -u -c "from ruaccent import RUAccent; accentizer = RUAccent(); accentizer.download()"
 # run the API
+
+python3 -c "from ruaccent import RUAccent; a = RUAccent(); a.load(omograph_model_size='turbo3.1', use_dictionary=True)"
 exec uvicorn app:app --host 0.0.0.0 --port ${PORT:-4123} --workers 1
