@@ -18,6 +18,7 @@ services:
     volumes:
       - f5tts_hf_cache:/root/.cache/huggingface/hub  # cache models
       - f5tts_data:/data
+      - ./loli.wav:/app/loli.wav # reference voice
     deploy:
       resources:
         limits:
