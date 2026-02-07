@@ -19,8 +19,8 @@ services:
       - f5tts_hf_cache:/root/.cache/huggingface/hub  # cache models
       - f5tts_data:/data
       - ./loli.wav:/app/loli.wav # reference voice
-      - ./F5-TTS_RUSSIAN/F5TTS_v1_Base:/app  # copy local folder 
-      - ./F5-TTS_RUSSIAN/F5TTS_v1_Base_v2:/app  # copy local folder 
+      - ./F5-TTS_RUSSIAN/F5TTS_v1_Base:/app/F5TTS_v1_Base  # copy local folder 
+      - ./F5-TTS_RUSSIAN/F5TTS_v1_Base_v2:/app/F5TTS_v1_Base_v2  # copy local folder 
     deploy:
       resources:
         limits:
