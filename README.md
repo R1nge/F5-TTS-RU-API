@@ -3,14 +3,13 @@
 ## Описание
 
 TODO: 
-- [ ] auto-create a network (create a bash script that does the neccesary steps)
-- [ ] save models into the repo and copy to the docker container
+- [x] auto-create a network (create a bash script that does the neccesary steps)
+- [x] save models into the repo and copy to the docker container
 
 
 Instructions:
 - Clone repo
-- Clone weights into the same folder `git clone https://huggingface.co/Misha24-10/F5-TTS_RUSSIAN`
-- Enter the weights folder `git lfs install` `git lfs pull`  ~50GB
+- Clone weights into the same folder `git lfs clone https://huggingface.co/Misha24-10/F5-TTS_RUSSIAN` ~50GB
 - Put a reference audio with the filename of `loli.wav`
 - bash start.sh
 
