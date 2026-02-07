@@ -10,7 +10,7 @@ TODO:
 Instructions:
 - Clone repo
 - Clone weights into the same folder `git clone https://huggingface.co/Misha24-10/F5-TTS_RUSSIAN`
-- Enter the weights folder `git lfs pull`
+- Enter the weights folder `git lfs pull`  ~50GB
 - Put a reference audio with the filename of `loli.wav`
 - bash start.sh
 
