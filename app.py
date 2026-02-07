@@ -169,14 +169,8 @@ def get_model_paths() -> tuple[str, str]:
     Raises:
         HTTPException: Если не найдены snapshot, ckpt или vocab.txt
     """
-    snapshot_glob = "/root/.cache/huggingface/hub/models--Misha24-10--F5-TTS_RUSSIAN/snapshots/*"
-    snapshot_dirs = sorted(glob.glob(snapshot_glob), key=os.path.getmtime, reverse=True)
-    if not snapshot_dirs:
-        raise HTTPException(status_code=500, detail="Model snapshot not found in huggingface cache")
-    snapshot_dir = snapshot_dirs[0]
-    
-    ckpt_path = os.path.join(snapshot_dir, "F5TTS_v1_Base_v2/model_last_inference.safetensors")
-    vocab_path = os.path.join(snapshot_dir, "F5TTS_v1_Base/vocab.txt")
+    ckpt_path = os.path.join("/app", "F5TTS_v1_Base_v2/model_last_inference.safetensors")
+    vocab_path = os.path.join("/app", "F5TTS_v1_Base/vocab.txt")
     if not os.path.isfile(ckpt_path):
         raise HTTPException(status_code=500, detail=f"model_last_inference.safetensors not found: {ckpt_path}")
     if not os.path.isfile(vocab_path):
